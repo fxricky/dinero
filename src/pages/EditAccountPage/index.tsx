@@ -3,10 +3,16 @@ import {Pressable, StyleSheet, Text, TextInput, View} from 'react-native';
 import Header from '@dinero/components/Header';
 import {color, font} from '@dinero/theme';
 import DineroInput from '@dinero/components/DeniroInput';
+import {Navigation} from '@dinero/navigation/utils';
+import {PAGE_NAME} from '@dinero/navigation/constants';
 
 type Props = {};
 
 const EditAccountPage: React.FC<Props> = ({}) => {
+  const gotoSuccessPage = () => {
+    Navigation.replace(PAGE_NAME.SUCCESS_PAGE);
+  };
+
   return (
     <View style={styles.container}>
       <Header />
@@ -44,7 +50,8 @@ const EditAccountPage: React.FC<Props> = ({}) => {
               justifyContent: 'center',
               alignItems: 'center',
               borderRadius: 16,
-            }}>
+            }}
+            onPress={gotoSuccessPage}>
             <Text style={{...font(18, 'semi-bold'), color: 'white'}}>
               Continue
             </Text>
