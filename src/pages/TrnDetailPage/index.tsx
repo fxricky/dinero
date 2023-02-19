@@ -71,7 +71,7 @@ const TrnDetailPage: React.FC<Props> = ({}) => {
   };
 
   const amountChangeHandler = (t: string) => {
-    console.log(t);
+    // console.log(t);
     // const paddedStr = t.replace('.', '').padStart(3, '0');
 
     // const decimalAmt = `${paddedStr.slice(0, -2)}.${paddedStr.slice(-2)}`;

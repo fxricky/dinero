@@ -9,7 +9,6 @@ type Props = {};
 const SplashPage: React.FC<Props> = ({}) => {
   useEffect(() => {
     setTimeout(() => {
-      console.log('hello');
       Navigation.replace(PAGE_NAME.ACCOUNT_SETUP_PAGE);
     }, 1000);
   }, []);

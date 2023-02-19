@@ -9,12 +9,6 @@ import {Text, View} from 'react-native';
 type Props = {};
 
 const TrnListItem: React.FC<Props> = ({}) => {
-  // console.log(extractEmojiCodeFrmString('🛍 testing'));
-
-  console.log(extractEmojiCodeFrmString('🛍'));
-  console.log('hello', String.fromCodePoint(128512));
-  console.log('hello1', '😀'.codePointAt(0));
-
   return (
     <View
       style={{

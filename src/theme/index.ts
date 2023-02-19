@@ -31,8 +31,6 @@ export function font(
       weight = '800';
   }
 
-  console.log(fontWeight);
-
   return {
     fontSize,
     fontWeight: weight,

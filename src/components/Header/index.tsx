@@ -20,7 +20,6 @@ const Header: React.FC<Props> = ({centerItem, pageTitle}) => {
   const Navigation = useNavigation();
 
   const popPage = () => {
-    console.log('popping');
     DineroNav.pop();
   };
 
