@@ -1,24 +1,36 @@
 import React from 'react';
-import {
-  FlatList,
-  Image,
-  Pressable,
-  StyleSheet,
-  Text,
-  TextInput,
-  View,
-} from 'react-native';
+import {FlatList, Pressable, StyleSheet, Text, View} from 'react-native';
 import {color, font} from '@dinero/theme';
+import {useIsFocused} from '@react-navigation/native';
+
 import AddTrnBtn from './components/AddTrnBtn';
 import IncomeImg from '@dinero/assets/images/income.png';
 import ExpenseImg from '@dinero/assets/images/expense.png';
 import StatsInfo from './components/StatsInfo';
-import PeriodBtn from './components/PeriodBtn';
 import TrnListItem from './components/TrnListItem';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import {STORAGE_KEYS} from '@dinero/constants';
 
 type Props = {};
 
 const DashboardPage: React.FC<Props> = ({}) => {
+  const [recentTrnList, setRecentTrnList] = React.useState([]);
+  const isFocused = useIsFocused();
+
+  React.useEffect(() => {
+    isFocused && retrieveTransactions();
+  }, [isFocused]);
+
+  const retrieveTransactions = async () => {
+    const result = await AsyncStorage.getItem(STORAGE_KEYS.TRANSACTIONS);
+
+    const parsedRes = JSON.parse(result || '');
+
+    setRecentTrnList(Object.values(parsedRes));
+  };
+
+  const calculateBalance = async () => {};
+
   return (
     <View style={styles.container}>
       <View style={styles.statsSection}>
@@ -64,9 +76,9 @@ const DashboardPage: React.FC<Props> = ({}) => {
         contentContainerStyle={{
           paddingHorizontal: 20,
         }}
-        data={[1, 2, 3, 4, 5, 6, 7]}
-        renderItem={() => {
-          return <TrnListItem />;
+        data={recentTrnList}
+        renderItem={({item}) => {
+          return <TrnListItem data={item} />;
         }}
         showsVerticalScrollIndicator={false}
         ItemSeparatorComponent={() => <View style={{height: 8}} />}

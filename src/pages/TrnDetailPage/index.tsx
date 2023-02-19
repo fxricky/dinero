@@ -31,6 +31,10 @@ const TrnDetailPage: React.FC<Props> = ({}) => {
         return Alert.alert('', 'Please input all the fields');
       }
 
+      if (isNaN(+trnAmount)) {
+        return Alert.alert('', 'Please input a valid amount');
+      }
+
       const transactions = await AsyncStorage.getItem(
         STORAGE_KEYS.TRANSACTIONS,
       );
@@ -40,9 +44,9 @@ const TrnDetailPage: React.FC<Props> = ({}) => {
       const data = {
         id: Date.now(),
         timestamp: Date.now(),
-        description: '',
-        category: '',
-        amount: '',
+        description: trnDesc,
+        category: trnCat,
+        amount: trnAmount,
         type: trnType,
       } as Transaction;
 
