@@ -17,7 +17,14 @@ const push = (pageName: string, pageData?: any) => {
   }
 };
 
+const pop = (pageData?: any) => {
+  if (navigationRef.isReady()) {
+    navigationRef.dispatch(StackActions.pop(pageData));
+  }
+};
+
 export const Navigation = {
   replace,
   push,
+  pop,
 };
