@@ -19,18 +19,9 @@ import TrnListItem from './components/TrnListItem';
 type Props = {};
 
 const DashboardPage: React.FC<Props> = ({}) => {
-  const [focusedPeriod, setFocusedPeriod] = React.useState('Today');
-
   return (
     <View style={styles.container}>
-      <View
-        style={{
-          backgroundColor: color.lightOrange,
-          borderBottomLeftRadius: 32,
-          borderBottomRightRadius: 32,
-          paddingTop: 64 + 44,
-          paddingBottom: 23,
-        }}>
+      <View style={styles.statsSection}>
         <Text
           style={{
             ...font(14, 'medium'),
@@ -62,49 +53,11 @@ const DashboardPage: React.FC<Props> = ({}) => {
           />
         </View>
       </View>
-      <Text
-        style={{
-          ...font(18, 'semi-bold'),
-          padding: 16,
-        }}>
-        Spend Frequency
-      </Text>
-      <View
-        style={{
-          flexDirection: 'row',
-          paddingHorizontal: 16,
-          paddingVertical: 8,
-        }}>
-        {['Today', 'Week', 'Month', 'Year'].map(period => {
-          return (
-            <PeriodBtn
-              key={`${period}`}
-              label={period}
-              focused={period === focusedPeriod}
-              pressAction={setFocusedPeriod}
-            />
-          );
-        })}
-      </View>
-      <View
-        style={{
-          flexDirection: 'row',
-          padding: 16,
-          alignItems: 'center',
-          justifyContent: 'space-between',
-        }}>
+      <View style={styles.recentTrnSectionHeader}>
         <Text style={{...font(18, 'semi-bold')}}>Recent Transaction</Text>
 
-        <Pressable
-          style={{
-            backgroundColor: color.violet20,
-            paddingVertical: 7,
-            paddingHorizontal: 16,
-            borderRadius: 40,
-          }}>
-          <Text style={{...font(14, 'medium'), color: color.violet}}>
-            See All
-          </Text>
+        <Pressable style={styles.seeAllBtn}>
+          <Text style={styles.seeAllTxt}>See All</Text>
         </Pressable>
       </View>
       <FlatList
@@ -130,6 +83,26 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: 'white',
+  },
+  seeAllBtn: {
+    backgroundColor: color.violet20,
+    paddingVertical: 7,
+    paddingHorizontal: 16,
+    borderRadius: 40,
+  },
+  seeAllTxt: {...font(14, 'medium'), color: color.violet},
+  recentTrnSectionHeader: {
+    flexDirection: 'row',
+    padding: 16,
+    alignItems: 'center',
+    justifyContent: 'space-between',
+  },
+  statsSection: {
+    backgroundColor: color.lightOrange,
+    borderBottomLeftRadius: 32,
+    borderBottomRightRadius: 32,
+    paddingTop: 64,
+    paddingBottom: 23,
   },
 });
 
