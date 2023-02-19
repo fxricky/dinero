@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {ReactElement} from 'react';
 import {
   Image,
   Platform,
@@ -12,11 +12,11 @@ import ArrowLeft from '@dinero/assets/icon/arrowLeft.png';
 import {font} from '@dinero/theme';
 import {Navigation as DineroNav} from '@dinero/navigation/utils';
 
-type Props = {pageTitle?: string};
+type Props = {pageTitle?: string; centerItem?: ReactElement};
 
 const STATUS_BAR_HEIGHT = Platform.OS === 'ios' ? 44 : 0;
 
-const Header: React.FC<Props> = ({pageTitle}) => {
+const Header: React.FC<Props> = ({centerItem, pageTitle}) => {
   const Navigation = useNavigation();
 
   const popPage = () => {
@@ -35,10 +35,20 @@ const Header: React.FC<Props> = ({pageTitle}) => {
             </Pressable>
           ) : null}
         </View>
-        <View style={{flex: 1}}>
-          <Text style={{...font(18, 'semi-bold')}} numberOfLines={1}>
-            {pageTitle}
-          </Text>
+        <View style={{flex: 1, justifyContent: 'center'}}>
+          {centerItem ? (
+            centerItem
+          ) : (
+            <Text
+              style={{
+                ...font(18, 'semi-bold'),
+                textAlign: 'center',
+                color: 'white',
+              }}
+              numberOfLines={1}>
+              {pageTitle}
+            </Text>
+          )}
         </View>
         <View style={{flex: 1}}></View>
       </View>

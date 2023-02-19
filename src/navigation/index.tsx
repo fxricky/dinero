@@ -7,6 +7,7 @@ import AccountSetupPage from '../pages/AccountSetupPage';
 import EditAccountPage from '../pages/EditAccountPage';
 import SuccessPage from '@dinero/pages/SuccessPage';
 import DashboardPage from '@dinero/pages/DashboardPage';
+import TrnDetailPage from '@dinero/pages/TrnDetailPage';
 
 type Props = {};
 
@@ -26,6 +27,10 @@ const NavigationRoot: React.FC<Props> = ({}) => {
       />
       <Stack.Screen name={PAGE_NAME.SUCCESS_PAGE} component={SuccessPage} />
       <Stack.Screen name={PAGE_NAME.DASHBOARD_PAGE} component={DashboardPage} />
+      <Stack.Screen
+        name={PAGE_NAME.TRN_DETAIL_PAGE}
+        component={TrnDetailPage}
+      />
     </Stack.Navigator>
   );
 };
