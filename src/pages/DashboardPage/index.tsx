@@ -10,26 +10,56 @@ import StatsInfo from './components/StatsInfo';
 import TrnListItem from './components/TrnListItem';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import {STORAGE_KEYS} from '@dinero/constants';
+import {Transaction} from '@dinero/types';
 
 type Props = {};
 
 const DashboardPage: React.FC<Props> = ({}) => {
-  const [recentTrnList, setRecentTrnList] = React.useState([]);
+  const [recentTrnList, setRecentTrnList] = React.useState<Transaction[]>([]);
+  const [balanceStat, setBalanceStat] = React.useState({
+    balance: 0,
+    income: 0,
+    expense: 0,
+  });
   const isFocused = useIsFocused();
 
   React.useEffect(() => {
-    isFocused && retrieveTransactions();
+    if (isFocused) {
+      retrieveTransactions();
+      calculateBalance();
+    }
   }, [isFocused]);
 
   const retrieveTransactions = async () => {
     const result = await AsyncStorage.getItem(STORAGE_KEYS.TRANSACTIONS);
 
-    const parsedRes = JSON.parse(result || '');
+    const parsedRes = JSON.parse(result || '') as Record<string, Transaction>;
 
     setRecentTrnList(Object.values(parsedRes));
   };
 
-  const calculateBalance = async () => {};
+  const calculateBalance = async () => {
+    let totalBal = 0,
+      inc = 0,
+      exp = 0;
+
+    for (const trn of recentTrnList) {
+      if (trn.type === 'expense') {
+        exp = +trn.amount;
+        continue;
+      }
+
+      inc = +trn.amount;
+    }
+
+    totalBal = inc - exp;
+
+    setBalanceStat({
+      balance: totalBal,
+      income: inc,
+      expense: exp,
+    });
+  };
 
   return (
     <View style={styles.container}>
@@ -43,7 +73,7 @@ const DashboardPage: React.FC<Props> = ({}) => {
           Account Balance
         </Text>
         <Text style={{...font(40, 'semi-bold'), textAlign: 'center'}}>
-          $9400
+          {`$${balanceStat.balance}`}
         </Text>
         <View
           style={{
@@ -54,13 +84,13 @@ const DashboardPage: React.FC<Props> = ({}) => {
           <StatsInfo
             icon={IncomeImg}
             label={'Income'}
-            amount={'$5000'}
+            amount={`$${balanceStat.income}`}
             bgColor={color.green}
           />
           <StatsInfo
             icon={ExpenseImg}
             label={'Expenses'}
-            amount={'$7000'}
+            amount={`$${balanceStat.expense}`}
             bgColor={color.red}
           />
         </View>

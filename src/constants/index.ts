@@ -3,7 +3,7 @@ export * from './storageKeys';
 export const EXPENSE_CATEGORIES = {
   shopping: {
     name: '',
-    icon: 0,
+    icon: 128717,
   },
   food: {
     name: '',
