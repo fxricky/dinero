@@ -13,7 +13,7 @@ const DineroInput: React.FC<Props> = ({...props}) => {
         paddingHorizontal: 16,
         paddingVertical: 12,
         borderWidth: 1,
-        borderColor: color.lightGray,
+        borderColor: color.superLightGray,
         height: 56,
       }}
     />

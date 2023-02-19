@@ -6,6 +6,7 @@ import SplashPage from '../pages/SplashPage';
 import AccountSetupPage from '../pages/AccountSetupPage';
 import EditAccountPage from '../pages/EditAccountPage';
 import SuccessPage from '@dinero/pages/SuccessPage';
+import DashboardPage from '@dinero/pages/DashboardPage';
 
 type Props = {};
 
@@ -24,6 +25,7 @@ const NavigationRoot: React.FC<Props> = ({}) => {
         component={EditAccountPage}
       />
       <Stack.Screen name={PAGE_NAME.SUCCESS_PAGE} component={SuccessPage} />
+      <Stack.Screen name={PAGE_NAME.DASHBOARD_PAGE} component={DashboardPage} />
     </Stack.Navigator>
   );
 };
