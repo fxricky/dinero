@@ -26,9 +26,12 @@ const DashboardPage: React.FC<Props> = ({}) => {
   React.useEffect(() => {
     if (isFocused) {
       retrieveTransactions();
-      calculateBalance();
     }
   }, [isFocused]);
+
+  React.useEffect(() => {
+    calculateBalance();
+  }, [recentTrnList]);
 
   const retrieveTransactions = async () => {
     const result = await AsyncStorage.getItem(STORAGE_KEYS.TRANSACTIONS);
